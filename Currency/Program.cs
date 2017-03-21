@@ -49,7 +49,6 @@ namespace Currency
                     Console.WriteLine("{0}: ask: {1}; bid: {2}", bankItem.title, ask, bid);
                     curSum += ask + bid;
                 }
-
                 else
                 {
                     Console.WriteLine("{0} - У этого банка нет такой валюты!!!!!!!!!!!!!!!!!!!!!!!!", bankItem.title);
