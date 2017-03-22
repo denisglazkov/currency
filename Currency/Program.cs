@@ -33,11 +33,12 @@ namespace Currency
 
             string uri = "http://resources.finance.ua/ru/public/currency-cash.json";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            request.Proxy=new WebProxy("192.168.1.4", 3128);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
             string strFile = Convert.ToString(reader.ReadToEnd());
 
-            List<Bank> initBank = Bank.GetBank(strFile);
+            List<Bank> initBank = Bank.GetBanks(strFile);
             List<Bank> _listBank = initBank.Where(x => listBank.Contains(x.title)).ToList();
 
             foreach (Bank bankItem in _listBank)
@@ -53,6 +54,11 @@ namespace Currency
                 {
                     Console.WriteLine("{0} - У этого банка нет такой валюты!!!!!!!!!!!!!!!!!!!!!!!!", bankItem.title);
                 }
+            }
+
+            if (initBank.Count < 11)
+            {
+                Console.WriteLine("Ярик, еще не все банки дали курс!!!!!!!");
             }
 
             curAvg = Math.Round(curSum / (_listBank.Count * 2), 2);

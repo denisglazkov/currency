@@ -14,7 +14,7 @@ namespace Currency
         public string title { get; set; }
         public Dictionary<string, Currency> currencies { get; set; }
 
-        public static List<Bank> GetBank(string fileObj)
+        public static List<Bank> GetBanks(string fileObj)
         {
             JObject obj = JObject.Parse(fileObj);
             List<Bank> organizations = obj["organizations"].ToObject<List<Bank>>();
